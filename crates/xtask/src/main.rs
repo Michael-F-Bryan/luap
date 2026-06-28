@@ -7,4 +7,6 @@ fn main() {
 
 #[derive(Parser, Debug)]
 #[command(author, version)]
-enum Cmd {}
+enum Cmd {
+    Codegen,
+}

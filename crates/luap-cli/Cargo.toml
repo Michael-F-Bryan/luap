@@ -1,7 +1,5 @@
 [package]
-name = "xtask"
-version = "0.0.0"
-publish = false
+name = "luap-cli"
 authors.workspace = true
 edition.workspace = true
 homepage.workspace = true
@@ -9,6 +7,11 @@ license.workspace = true
 readme.workspace = true
 repository.workspace = true
 rust-version.workspace = true
+version.workspace = true
 
 [dependencies]
 clap = { workspace = true }
+
+[[bin]]
+name = "luap"
+doc = false
