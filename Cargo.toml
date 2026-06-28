@@ -1,0 +1,13 @@
+[workspace]
+members = ["crates/*"]
+
+[workspace.package]
+authors = ["Michael-F-Bryan <michaelfbryan@gmail.com>"]
+edition = "2021"
+homepage = "https://github.com/Michael-F-Bryan/luap.git"
+license = "MIT OR Apache-2.0"
+readme = "README.md"
+repository = "https://github.com/Michael-F-Bryan/luap.git"
+# needed for [workspace.package]
+rust-version = "1.96.0"
+version = "0.1.0"
