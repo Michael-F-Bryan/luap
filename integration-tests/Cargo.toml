@@ -1,0 +1,20 @@
+[package]
+name = "integration-tests"
+authors.workspace = true
+edition.workspace = true
+homepage.workspace = true
+license.workspace = true
+readme.workspace = true
+repository.workspace = true
+rust-version.workspace = true
+version.workspace = true
+
+[dependencies]
+insta = "1.48.0"
+libtest-mimic = "0.8.2"
+luap = { version = "0.1.0", path = "../crates/luap" }
+
+[[test]]
+name = "integration_tests"
+path = "tests/integration-tests.rs"
+harness = false

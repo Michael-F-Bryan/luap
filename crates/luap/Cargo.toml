@@ -12,3 +12,10 @@ version.workspace = true
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+bytestring = "1.5.1"
+camino = "1.2.4"
+miette = "7.6.0"
+salsa = "0.27.2"
+thiserror = "2.0.18"
+tree-sitter = "0.26.10"
+tree-sitter-lua = "0.5.0"
