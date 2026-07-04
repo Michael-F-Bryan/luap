@@ -171,7 +171,7 @@ impl<'db> LowerCtx<'db> {
     fn lower_expression(&self, expr: syntax::Expression<'_>) -> Option<Expr> {
         let source = &*self.source_file.contents(self.db);
         match expr {
-            syntax::Expression::String(string) => Some(Expr::String {
+            syntax::Expression::String(string) => Some(Expr::StringLiteral {
                 value: string::decode(&string, source),
                 ptr: StringPtr::from_node(self.source_file, string),
             }),

@@ -1,0 +1,36 @@
+---
+source: crates/luap/src/compiling/compile.rs
+expression: "(bytecode.instructions(&db), bytecode.constants(&db), bytecode.num_regs(&db),)"
+---
+(
+    [
+        GetBuiltin {
+            dst: Reg(
+                0,
+            ),
+            id: Print,
+        },
+        LoadConst {
+            dst: Reg(
+                1,
+            ),
+            idx: 0,
+        },
+        Call {
+            callee: Reg(
+                0,
+            ),
+            args_base: Reg(
+                1,
+            ),
+            argc: 1,
+        },
+        Halt,
+    ],
+    [
+        String(
+            "Hello, world!",
+        ),
+    ],
+    2,
+)

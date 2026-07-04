@@ -43,6 +43,7 @@ mod tests {
             .map(|diagnostic| match &diagnostic.0 {
                 DiagnosticKind::SyntaxError(err) => err.message.clone(),
                 DiagnosticKind::Unsupported(err) => err.message.clone(),
+                DiagnosticKind::UnresolvedName(err) => err.name.clone(),
             })
             .collect()
     }

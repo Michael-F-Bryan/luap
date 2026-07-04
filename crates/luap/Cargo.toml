@@ -15,6 +15,7 @@ version.workspace = true
 bytestring = "1.5.1"
 camino = "1.2.4"
 miette = "7.6.0"
+ordered-float = "5.3.0"
 salsa = "0.27.2"
 thiserror = "2.0.18"
 tree-sitter = "0.26.10"

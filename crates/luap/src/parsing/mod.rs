@@ -96,7 +96,9 @@ mod tests {
         assert_eq!(diagnostics.len(), 1);
         match &diagnostics[0].0 {
             DiagnosticKind::SyntaxError(err) => err.clone(),
-            DiagnosticKind::Unsupported(_) => panic!("expected syntax error"),
+            DiagnosticKind::Unsupported(_) | DiagnosticKind::UnresolvedName(_) => {
+                panic!("expected syntax error")
+            }
         }
     }
 

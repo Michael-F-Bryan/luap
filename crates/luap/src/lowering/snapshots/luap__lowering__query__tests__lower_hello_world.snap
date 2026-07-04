@@ -30,7 +30,7 @@ expression: file.statements(&db)
                 },
             },
             args: [
-                String {
+                StringLiteral {
                     value: "Hello, world!",
                     ptr: Ptr {
                         pointer: Pointer {

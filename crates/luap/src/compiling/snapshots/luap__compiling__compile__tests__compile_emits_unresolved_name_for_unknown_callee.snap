@@ -1,0 +1,7 @@
+---
+source: crates/luap/src/compiling/compile.rs
+expression: diagnostics
+---
+[
+    "unknown",
+]

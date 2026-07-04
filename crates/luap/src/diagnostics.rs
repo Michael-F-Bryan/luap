@@ -11,6 +11,7 @@ impl Diagnostic {
         match &self.0 {
             DiagnosticKind::SyntaxError(err) => miette::Report::new(err.clone()),
             DiagnosticKind::Unsupported(err) => miette::Report::new(err.clone()),
+            DiagnosticKind::UnresolvedName(err) => miette::Report::new(err.clone()),
         }
     }
 }
@@ -19,6 +20,7 @@ impl Diagnostic {
 pub enum DiagnosticKind {
     SyntaxError(SyntaxError),
     Unsupported(Unsupported),
+    UnresolvedName(UnresolvedName),
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, miette::Diagnostic, thiserror::Error)]
@@ -48,6 +50,26 @@ impl Unsupported {
         Self {
             message: format!("{feature} is not supported yet"),
             label: feature.into(),
+            src: NamedSource::new(path, Arc::from(source)),
+            span: SourceSpan::from(span.start_byte..span.end_byte),
+        }
+    }
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Hash, miette::Diagnostic, thiserror::Error)]
+#[error("unresolved name `{name}`")]
+pub struct UnresolvedName {
+    pub name: String,
+    #[source_code]
+    pub src: NamedSource<Arc<str>>,
+    #[label("not found")]
+    pub span: SourceSpan,
+}
+
+impl UnresolvedName {
+    pub(crate) fn at(path: &str, source: &str, name: &str, span: tree_sitter::Range) -> Self {
+        Self {
+            name: name.into(),
             src: NamedSource::new(path, Arc::from(source)),
             span: SourceSpan::from(span.start_byte..span.end_byte),
         }

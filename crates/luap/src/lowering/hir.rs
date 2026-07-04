@@ -24,6 +24,6 @@ pub struct CallStmt {
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash)]
 pub enum Expr {
-    String { value: String, ptr: StringPtr },
+    StringLiteral { value: String, ptr: StringPtr },
     Name { name: String, ptr: IdentifierPtr },
 }

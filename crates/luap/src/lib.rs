@@ -1,4 +1,5 @@
 mod compiler;
+mod compiling;
 pub mod diagnostics;
 mod lowering;
 mod parsing;
@@ -8,6 +9,7 @@ mod types;
 
 pub use crate::{
     compiler::Compiler,
+    compiling::{compile, bytecode},
     diagnostics::{Diagnostic, DiagnosticKind},
     lowering::{hir, query::lower},
     parsing::{parse, ParsedOutput, Tree},
