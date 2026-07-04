@@ -11,6 +11,8 @@ version.workspace = true
 
 [dependencies]
 clap = { workspace = true }
+luap = { path = "../luap" }
+miette = { version = "7.6.0", features = ["fancy"] }
 
 [[bin]]
 name = "luap"

@@ -8,6 +8,7 @@ mod types;
 
 pub use crate::{
     compiler::Compiler,
+    diagnostics::{Diagnostic, DiagnosticKind},
     lowering::{hir, query::lower},
     parsing::{parse, ParsedOutput, Tree},
     types::SourceFile,

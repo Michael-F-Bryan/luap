@@ -1,11 +1,23 @@
 use clap::Parser;
 use luap_cli::Cmd;
+use std::process::ExitCode;
 
-fn main() {
-    let cmd = Cmd::parse();
-    match cmd {
-        Cmd::Build(build_cmd) => build_cmd.run(),
-        Cmd::Run(run_cmd) => run_cmd.run(),
-        Cmd::Lsp(lsp_cmd) => lsp_cmd.run(),
-    }
+fn main() -> miette::Result<ExitCode> {
+    miette::set_hook(Box::new(|_| Box::new(miette::MietteHandlerOpts::new().build())))?;
+
+    Ok(match Cmd::parse() {
+        Cmd::Build(build_cmd) => {
+            build_cmd.run();
+            ExitCode::SUCCESS
+        }
+        Cmd::Parse(parse_cmd) => parse_cmd.run()?,
+        Cmd::Run(run_cmd) => {
+            run_cmd.run();
+            ExitCode::SUCCESS
+        }
+        Cmd::Lsp(lsp_cmd) => {
+            lsp_cmd.run();
+            ExitCode::SUCCESS
+        }
+    })
 }

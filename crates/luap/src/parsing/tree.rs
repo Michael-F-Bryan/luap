@@ -17,6 +17,12 @@ impl From<tree_sitter::Tree> for Tree {
     }
 }
 
+impl std::fmt::Display for Tree {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "{}", self.0.root_node().to_sexp())
+    }
+}
+
 impl PartialEq for Tree {
     fn eq(&self, other: &Self) -> bool {
         let mut left = self.0.root_node().walk();

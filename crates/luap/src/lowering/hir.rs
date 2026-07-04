@@ -1,3 +1,5 @@
+//! High-level intermediate representation.
+
 use crate::pointer::ChunkPtr;
 
 #[salsa::tracked]
