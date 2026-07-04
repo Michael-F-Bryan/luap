@@ -6,10 +6,11 @@ mod parsing;
 pub mod pointer;
 pub mod syntax;
 mod types;
+pub mod vm;
 
 pub use crate::{
     compiler::Compiler,
-    compiling::{compile, bytecode},
+    compiling::{bytecode, compile},
     diagnostics::{Diagnostic, DiagnosticKind},
     lowering::{hir, query::lower},
     parsing::{parse, ParsedOutput, Tree},

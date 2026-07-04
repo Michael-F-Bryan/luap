@@ -140,7 +140,7 @@ impl<'db> LowerCtx<'db> {
     }
 
     fn lower_variable(&self, variable: syntax::Variable<'_>) -> Option<Expr> {
-        let source = &*self.source_file.contents(self.db);
+        let source = self.source_file.contents(self.db);
         match variable {
             syntax::Variable::Identifier(identifier) => {
                 let name = identifier
@@ -169,7 +169,7 @@ impl<'db> LowerCtx<'db> {
     }
 
     fn lower_expression(&self, expr: syntax::Expression<'_>) -> Option<Expr> {
-        let source = &*self.source_file.contents(self.db);
+        let source = self.source_file.contents(self.db);
         match expr {
             syntax::Expression::String(string) => Some(Expr::StringLiteral {
                 value: string::decode(&string, source),
@@ -228,7 +228,7 @@ impl<'db> LowerCtx<'db> {
 
     fn unsupported(&self, node: &type_sitter::raw::Node<'_>, feature: &str) {
         let path = self.source_file.path(self.db);
-        let source = &*self.source_file.contents(self.db);
+        let source = self.source_file.contents(self.db);
         Diagnostic(DiagnosticKind::Unsupported(Unsupported::at(
             path.as_str(),
             source,

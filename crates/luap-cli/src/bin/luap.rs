@@ -15,10 +15,7 @@ fn main() -> miette::Result<ExitCode> {
         }
         Cmd::Check(check_cmd) => check_cmd.run()?,
         Cmd::Parse(parse_cmd) => parse_cmd.run()?,
-        Cmd::Run(run_cmd) => {
-            run_cmd.run();
-            ExitCode::SUCCESS
-        }
+        Cmd::Run(run_cmd) => run_cmd.run()?,
         Cmd::Lsp(lsp_cmd) => {
             lsp_cmd.run();
             ExitCode::SUCCESS
