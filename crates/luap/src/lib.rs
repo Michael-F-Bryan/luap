@@ -1,7 +1,9 @@
 mod compiler;
 pub mod diagnostics;
 mod lowering;
+pub mod pointer;
 mod parsing;
+pub mod syntax;
 mod types;
 
 pub use crate::{

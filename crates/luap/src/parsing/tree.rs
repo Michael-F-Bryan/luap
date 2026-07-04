@@ -3,6 +3,14 @@ use std::hash::{Hash, Hasher};
 #[derive(Debug, Clone)]
 pub struct Tree(tree_sitter::Tree);
 
+impl std::ops::Deref for Tree {
+    type Target = tree_sitter::Tree;
+
+    fn deref(&self) -> &Self::Target {
+        &self.0
+    }
+}
+
 impl From<tree_sitter::Tree> for Tree {
     fn from(tree: tree_sitter::Tree) -> Self {
         Self(tree)

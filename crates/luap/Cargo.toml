@@ -19,3 +19,8 @@ salsa = "0.27.2"
 thiserror = "2.0.18"
 tree-sitter = "0.26.10"
 tree-sitter-lua = "0.5.0"
+type-sitter = "0.10.1"
+
+[build-dependencies]
+tree-sitter-lua = "0.5.0"
+type-sitter-gen = "0.10.1"

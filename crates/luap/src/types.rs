@@ -4,6 +4,7 @@ use bytestring::ByteString;
 use camino::Utf8Path;
 
 #[salsa::input]
+#[derive(Debug)]
 pub struct SourceFile {
     pub path: Arc<Utf8Path>,
     #[returns(ref)]
@@ -19,5 +20,12 @@ impl SourceFile {
             Utf8Path::from_path(path).unwrap().into(),
             contents.into(),
         ))
+    }
+}
+
+#[salsa::tracked]
+impl SourceFile {
+    pub fn parse(self, db: &dyn crate::Db) -> crate::parsing::Tree {
+        crate::parse(db, self)
     }
 }

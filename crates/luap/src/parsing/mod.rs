@@ -1,5 +1,7 @@
 mod tree;
 
+use type_sitter::Node;
+
 pub use self::tree::Tree;
 
 use crate::types::SourceFile;
@@ -22,5 +24,14 @@ pub fn parse(db: &dyn crate::Db, source_file: SourceFile) -> Tree {
 #[salsa::tracked]
 pub struct ParsedOutput<'db> {
     pub source_file: SourceFile,
+    #[returns(ref)]
     pub tree: Tree,
+}
+
+#[salsa::tracked]
+impl<'db> ParsedOutput<'db> {
+    pub fn root(&self, db: &'db dyn crate::Db) -> crate::syntax::Chunk<'db> {
+        let root = self.tree(db).root_node();
+        crate::syntax::Chunk::try_from_raw(root).unwrap()
+    }
 }
