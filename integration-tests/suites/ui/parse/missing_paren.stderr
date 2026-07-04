@@ -1,0 +1,7 @@
+  × expected ')'
+   ╭─[$FILE:2:8]
+ 1 │ -- Missing ')' in a function call.
+ 2 │ print(1
+   ·        ▲
+   ·        ╰── expected ')' here
+   ╰────

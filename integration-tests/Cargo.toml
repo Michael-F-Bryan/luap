@@ -8,13 +8,19 @@ readme.workspace = true
 repository.workspace = true
 rust-version.workspace = true
 version.workspace = true
+publish = false
 
-[dependencies]
-insta = "1.48.0"
-libtest-mimic = "0.8.2"
-luap = { version = "0.1.0", path = "../crates/luap" }
+[[bin]]
+name = "luap-test"
+path = "src/bin/luap-test.rs"
 
 [[test]]
-name = "integration_tests"
-path = "tests/integration-tests.rs"
+name = "suites"
+path = "tests/suites.rs"
 harness = false
+
+[dependencies]
+clap = { workspace = true }
+libtest-mimic = "0.8.2"
+luap-cli = { path = "../crates/luap-cli" }
+regex = "1.11.1"

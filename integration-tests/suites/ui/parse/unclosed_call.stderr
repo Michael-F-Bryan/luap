@@ -1,0 +1,7 @@
+  × expected expression or ')' before end of file
+   ╭─[$FILE:2:7]
+ 1 │ -- Unclosed function call before end of file.
+ 2 │ print(
+   ·       ▲
+   ·       ╰── unexpected end of file
+   ╰────

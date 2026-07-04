@@ -10,6 +10,7 @@ fn main() -> miette::Result<ExitCode> {
             build_cmd.run();
             ExitCode::SUCCESS
         }
+        Cmd::Check(check_cmd) => check_cmd.run()?,
         Cmd::Parse(parse_cmd) => parse_cmd.run()?,
         Cmd::Run(run_cmd) => {
             run_cmd.run();
