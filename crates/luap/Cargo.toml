@@ -24,3 +24,6 @@ type-sitter = "0.10.1"
 [build-dependencies]
 tree-sitter-lua = "0.5.0"
 type-sitter-gen = "0.10.1"
+
+[dev-dependencies]
+insta = "1.46.3"

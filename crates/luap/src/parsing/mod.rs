@@ -5,9 +5,10 @@ use salsa::Accumulator;
 use type_sitter::Node;
 
 pub use self::tree::Tree;
-
-use crate::diagnostics::{Diagnostic, DiagnosticKind};
-use crate::types::SourceFile;
+use crate::{
+    diagnostics::{Diagnostic, DiagnosticKind},
+    types::SourceFile,
+};
 
 /// Parse a source file into a concrete syntax tree.
 #[salsa::tracked]
@@ -70,12 +71,11 @@ impl<'db> ParsedOutput<'db> {
 
 #[cfg(test)]
 mod tests {
-    use super::*;
-
     use std::sync::Arc;
 
     use camino::Utf8Path;
 
+    use super::*;
     use crate::{diagnostics::SyntaxError, Compiler, SourceFile};
 
     fn source_file(db: &Compiler, path: &str, source: &str) -> SourceFile {
@@ -96,6 +96,7 @@ mod tests {
         assert_eq!(diagnostics.len(), 1);
         match &diagnostics[0].0 {
             DiagnosticKind::SyntaxError(err) => err.clone(),
+            DiagnosticKind::Unsupported(_) => panic!("expected syntax error"),
         }
     }
 

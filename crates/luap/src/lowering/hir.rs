@@ -1,14 +1,29 @@
 //! High-level intermediate representation.
 
-use crate::pointer::ChunkPtr;
+use crate::pointer::{ChunkPtr, IdentifierPtr, StatementPtr, StringPtr};
 
 #[salsa::tracked]
 #[derive(Debug)]
 pub struct File<'db> {
-    statements: Vec<Statement<'db>>,
-    ptr: ChunkPtr,
+    #[returns(ref)]
+    pub statements: Vec<Stmt>,
+    pub ptr: ChunkPtr,
 }
 
-#[salsa::tracked]
-#[derive(Debug)]
-pub struct Statement<'db> {}
+#[derive(Debug, Clone, PartialEq, Eq, Hash)]
+pub enum Stmt {
+    Call(CallStmt),
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Hash)]
+pub struct CallStmt {
+    pub callee: Expr,
+    pub args: Vec<Expr>,
+    pub ptr: StatementPtr,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Hash)]
+pub enum Expr {
+    String { value: String, ptr: StringPtr },
+    Name { name: String, ptr: IdentifierPtr },
+}

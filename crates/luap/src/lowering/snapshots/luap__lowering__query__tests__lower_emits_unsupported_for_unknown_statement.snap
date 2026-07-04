@@ -1,0 +1,7 @@
+---
+source: crates/luap/src/lowering/query.rs
+expression: diagnostics
+---
+[
+    "declarations is not supported yet",
+]

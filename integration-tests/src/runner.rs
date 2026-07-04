@@ -1,12 +1,13 @@
-use std::fs;
-use std::path::Path;
+use std::{fs, path::Path};
 
 use libtest_mimic::Failed;
 
-use crate::config::Config;
-use crate::directives::{Expectation, Suite, TestCase};
-use crate::luap_cmd;
-use crate::normalize::normalize_output;
+use crate::{
+    config::Config,
+    directives::{Expectation, Suite, TestCase},
+    luap_cmd,
+    normalize::normalize_output,
+};
 
 pub fn run_test(config: &Config, case: &TestCase) -> Result<(), Failed> {
     match case.suite {
@@ -17,12 +18,8 @@ pub fn run_test(config: &Config, case: &TestCase) -> Result<(), Failed> {
 }
 
 fn run_ui(config: &Config, case: &TestCase) -> Result<(), Failed> {
-    let output = luap_cmd::run(&config.luap, "check", case.path.as_path()).map_err(|err| {
-        Failed::from(format!(
-            "failed to spawn {}: {err}",
-            config.luap.display()
-        ))
-    })?;
+    let output = luap_cmd::run(&config.luap, "check", case.path.as_path())
+        .map_err(|err| Failed::from(format!("failed to spawn {}: {err}", config.luap.display())))?;
 
     let stderr = normalize_output(
         &decode(&output.stderr),
@@ -58,12 +55,8 @@ fn run_ui(config: &Config, case: &TestCase) -> Result<(), Failed> {
 }
 
 fn run_run(config: &Config, case: &TestCase) -> Result<(), Failed> {
-    let output = luap_cmd::run(&config.luap, "run", case.path.as_path()).map_err(|err| {
-        Failed::from(format!(
-            "failed to spawn {}: {err}",
-            config.luap.display()
-        ))
-    })?;
+    let output = luap_cmd::run(&config.luap, "run", case.path.as_path())
+        .map_err(|err| Failed::from(format!("failed to spawn {}: {err}", config.luap.display())))?;
 
     let stdout = normalize_output(
         &decode(&output.stdout),
@@ -135,18 +128,15 @@ fn read_expected(path: &Path) -> Result<String, Failed> {
     if !path.exists() {
         return Ok(String::new());
     }
-    fs::read_to_string(path).map_err(|err| {
-        Failed::from(format!("failed to read {}: {err}", path.display()))
-    })
+    fs::read_to_string(path)
+        .map_err(|err| Failed::from(format!("failed to read {}: {err}", path.display())))
 }
 
 fn write_expected(path: &Path, contents: &str) -> Result<(), Failed> {
     if let Some(parent) = path.parent() {
-        fs::create_dir_all(parent).map_err(|err| {
-            Failed::from(format!("failed to create {}: {err}", parent.display()))
-        })?;
+        fs::create_dir_all(parent)
+            .map_err(|err| Failed::from(format!("failed to create {}: {err}", parent.display())))?;
     }
-    fs::write(path, contents).map_err(|err| {
-        Failed::from(format!("failed to write {}: {err}", path.display()))
-    })
+    fs::write(path, contents)
+        .map_err(|err| Failed::from(format!("failed to write {}: {err}", path.display())))
 }

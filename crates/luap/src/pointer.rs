@@ -103,6 +103,7 @@ pointer_types! {
     BlockPtr = Block,
     StatementPtr = Statement,
     ExpressionPtr = Expression,
+    IdentifierPtr = Identifier,
     NumberPtr = Number,
     StringPtr = String,
     NilPtr = Nil,

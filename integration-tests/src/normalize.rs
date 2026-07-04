@@ -2,7 +2,11 @@ use std::path::Path;
 
 use regex::Regex;
 
-pub fn normalize_output(output: &str, test_path: &Path, replacements: &[(String, String)]) -> String {
+pub fn normalize_output(
+    output: &str,
+    test_path: &Path,
+    replacements: &[(String, String)],
+) -> String {
     let mut normalized = output.replace("\r\n", "\n");
 
     if let Ok(canon) = test_path.canonicalize() {

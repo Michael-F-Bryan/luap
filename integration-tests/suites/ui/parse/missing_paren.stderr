@@ -1,7 +1,7 @@
   × expected ')'
-   ╭─[$FILE:2:8]
+   ╭─[$FILE:2:10]
  1 │ -- Missing ')' in a function call.
- 2 │ print(1
-   ·        ▲
-   ·        ╰── expected ')' here
+ 2 │ print("x"
+   ·          ▲
+   ·          ╰── expected ')' here
    ╰────

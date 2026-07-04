@@ -1,7 +1,8 @@
 use std::ops::Range;
 
-use crate::diagnostics::SyntaxError;
 use miette::{NamedSource, SourceSpan};
+
+use crate::diagnostics::SyntaxError;
 
 pub(crate) fn describe(
     lang: &tree_sitter::Language,

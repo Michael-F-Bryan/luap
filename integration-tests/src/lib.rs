@@ -8,13 +8,12 @@ mod luap_cmd;
 mod normalize;
 mod runner;
 
-pub use config::Config;
-pub use discover::discover;
-pub use runner::run_test;
-
 use std::process::ExitCode;
 
+pub use config::Config;
+pub use discover::discover;
 use libtest_mimic::Arguments;
+pub use runner::run_test;
 
 /// Entry point for the `luap-test` binary and `suites` integration test target.
 pub fn run() -> ExitCode {

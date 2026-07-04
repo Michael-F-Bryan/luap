@@ -1,0 +1,81 @@
+---
+source: crates/luap/src/lowering/query.rs
+expression: file.statements(&db)
+---
+[
+    Call(
+        CallStmt {
+            callee: Name {
+                name: "print",
+                ptr: Ptr {
+                    pointer: Pointer {
+                        source_file: SourceFile(
+                            Id(0),
+                        ),
+                        span: Range {
+                            start_byte: 0,
+                            end_byte: 5,
+                            start_point: Point {
+                                row: 0,
+                                column: 0,
+                            },
+                            end_point: Point {
+                                row: 0,
+                                column: 5,
+                            },
+                        },
+                        kind: "identifier",
+                    },
+                    _marker: PhantomData<luap::syntax::Identifier<'_>>,
+                },
+            },
+            args: [
+                String {
+                    value: "Hello, world!",
+                    ptr: Ptr {
+                        pointer: Pointer {
+                            source_file: SourceFile(
+                                Id(0),
+                            ),
+                            span: Range {
+                                start_byte: 6,
+                                end_byte: 21,
+                                start_point: Point {
+                                    row: 0,
+                                    column: 6,
+                                },
+                                end_point: Point {
+                                    row: 0,
+                                    column: 21,
+                                },
+                            },
+                            kind: "string",
+                        },
+                        _marker: PhantomData<luap::syntax::String<'_>>,
+                    },
+                },
+            ],
+            ptr: Ptr {
+                pointer: Pointer {
+                    source_file: SourceFile(
+                        Id(0),
+                    ),
+                    span: Range {
+                        start_byte: 0,
+                        end_byte: 22,
+                        start_point: Point {
+                            row: 0,
+                            column: 0,
+                        },
+                        end_point: Point {
+                            row: 0,
+                            column: 22,
+                        },
+                    },
+                    kind: "function_call",
+                },
+                _marker: PhantomData<luap::syntax::Statement<'_>>,
+            },
+        },
+    ),
+]

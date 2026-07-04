@@ -1,5 +1,7 @@
-use std::path::Path;
-use std::process::{Command, Output};
+use std::{
+    path::Path,
+    process::{Command, Output},
+};
 
 /// Build a `luap` subprocess with deterministic, colour-free output.
 pub fn command(luap: &Path) -> Command {

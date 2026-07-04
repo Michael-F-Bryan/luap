@@ -1,11 +1,12 @@
-use std::fs;
-use std::path::Path;
+use std::{fs, path::Path};
 
 use libtest_mimic::Trial;
 
-use crate::config::Config;
-use crate::directives::{suite_from_path, Suite, TestCase};
-use crate::runner::run_test;
+use crate::{
+    config::Config,
+    directives::{suite_from_path, Suite, TestCase},
+    runner::run_test,
+};
 
 pub fn discover(config: &Config) -> Vec<Trial> {
     let mut cases = Vec::new();

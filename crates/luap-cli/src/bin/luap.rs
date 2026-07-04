@@ -1,9 +1,12 @@
-use clap::Parser;
-use luap_cli::Cmd;
 use std::process::ExitCode;
 
+use clap::Parser;
+use luap_cli::Cmd;
+
 fn main() -> miette::Result<ExitCode> {
-    miette::set_hook(Box::new(|_| Box::new(miette::MietteHandlerOpts::new().build())))?;
+    miette::set_hook(Box::new(|_| {
+        Box::new(miette::MietteHandlerOpts::new().build())
+    }))?;
 
     Ok(match Cmd::parse() {
         Cmd::Build(build_cmd) => {

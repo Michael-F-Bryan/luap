@@ -1,3 +1,3 @@
 -- Valid syntax should produce no diagnostics.
 --@ check-pass
-print(1)
+print("Hello, world!")

@@ -1,8 +1,8 @@
 mod compiler;
 pub mod diagnostics;
 mod lowering;
-pub mod pointer;
 mod parsing;
+pub mod pointer;
 pub mod syntax;
 mod types;
 
