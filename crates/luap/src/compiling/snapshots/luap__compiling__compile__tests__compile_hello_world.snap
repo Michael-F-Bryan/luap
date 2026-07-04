@@ -1,6 +1,6 @@
 ---
 source: crates/luap/src/compiling/compile.rs
-expression: "(bytecode.instructions(&db), bytecode.constants(&db), bytecode.num_regs(&db),)"
+expression: "(&bytecode.instructions, &bytecode.constants, bytecode.num_regs,)"
 ---
 (
     [

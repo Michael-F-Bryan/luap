@@ -28,7 +28,11 @@ impl CodeBuilder {
     }
 
     pub(crate) fn intern_constant(&mut self, constant: Constant) -> u16 {
-        if let Some(idx) = self.constants.iter().position(|existing| existing == &constant) {
+        if let Some(idx) = self
+            .constants
+            .iter()
+            .position(|existing| existing == &constant)
+        {
             return idx as u16;
         }
 
@@ -41,10 +45,14 @@ impl CodeBuilder {
         self.instructions.push(instruction);
     }
 
-    pub(crate) fn finish(self, db: &dyn crate::Db) -> Bytecode<'_> {
+    pub(crate) fn finish(self) -> Bytecode {
         let mut instructions = self.instructions;
         instructions.push(Instruction::Halt);
 
-        Bytecode::new(db, instructions, self.constants, self.next_reg)
+        Bytecode {
+            instructions,
+            constants: self.constants,
+            num_regs: self.next_reg,
+        }
     }
 }

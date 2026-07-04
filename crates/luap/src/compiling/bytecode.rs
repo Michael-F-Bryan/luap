@@ -10,20 +10,23 @@ use super::builtins::BuiltinId;
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
 pub struct Reg(pub u16);
 
-#[salsa::tracked]
-#[derive(Debug)]
-pub struct Bytecode<'db> {
-    #[returns(ref)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash)]
+pub struct Bytecode {
     pub instructions: Vec<Instruction>,
-    #[returns(ref)]
     pub constants: Vec<Constant>,
     pub num_regs: u16,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash)]
 pub enum Instruction {
-    LoadConst { dst: Reg, idx: u16 },
-    GetBuiltin { dst: Reg, id: BuiltinId },
+    LoadConst {
+        dst: Reg,
+        idx: u16,
+    },
+    GetBuiltin {
+        dst: Reg,
+        id: BuiltinId,
+    },
     Call {
         callee: Reg,
         args_base: Reg,

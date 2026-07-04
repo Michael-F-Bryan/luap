@@ -4,11 +4,11 @@ use super::builder::CodeBuilder;
 
 /// Compile a Lua source file to bytecode.
 #[salsa::tracked]
-pub fn compile(db: &dyn crate::Db, source_file: SourceFile) -> Bytecode<'_> {
+pub fn compile(db: &dyn crate::Db, source_file: SourceFile) -> Bytecode {
     let file = lower(db, source_file);
     let mut builder = CodeBuilder::new();
     file.compile(db, &mut builder);
-    builder.finish(db)
+    builder.finish()
 }
 
 #[cfg(test)]
@@ -25,7 +25,7 @@ mod tests {
         SourceFile::new(db, Arc::from(Utf8Path::new(path)), source.into())
     }
 
-    fn compile_file<'a>(db: &'a Compiler, path: &str, source: &str) -> Bytecode<'a> {
+    fn compile_file<'a>(db: &'a Compiler, path: &str, source: &str) -> Bytecode {
         let source_file = source_file(db, path, source);
         compile(db, source_file)
     }
@@ -49,11 +49,13 @@ mod tests {
         let bytecode = compile_file(&db, "hello_world.lua", r#"print("Hello, world!")"#);
 
         assert_debug_snapshot!((
-            bytecode.instructions(&db),
-            bytecode.constants(&db),
-            bytecode.num_regs(&db),
+            &bytecode.instructions,
+            &bytecode.constants,
+            bytecode.num_regs,
         ));
-        assert!(compile_diagnostics(&db, "hello_world.lua", r#"print("Hello, world!")"#).is_empty());
+        assert!(
+            compile_diagnostics(&db, "hello_world.lua", r#"print("Hello, world!")"#).is_empty()
+        );
     }
 
     #[test]
