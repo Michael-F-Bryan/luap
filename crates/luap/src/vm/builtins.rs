@@ -1,6 +1,21 @@
-use crate::vm::{Environment, RuntimeError, Value};
+use crate::vm::{Environment, NativeFuncValue, RuntimeError, Value};
 
-pub fn print(env: &mut Environment, args: &[Value]) -> Result<Value, RuntimeError> {
+#[derive(Debug, Clone)]
+pub struct Builtins {
+    pub print: NativeFuncValue,
+}
+
+impl Default for Builtins {
+    fn default() -> Self {
+        Self {
+            print: NativeFuncValue::new(
+                print as fn(&mut Environment, &[Value]) -> Result<Value, RuntimeError>,
+            ),
+        }
+    }
+}
+
+fn print(env: &mut Environment, args: &[Value]) -> Result<Value, RuntimeError> {
     for (i, arg) in args.iter().enumerate() {
         if i > 0 {
             write!(env.stdout, "\t")?;

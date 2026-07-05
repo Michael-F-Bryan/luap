@@ -8,6 +8,7 @@ mod value;
 mod virtual_machine;
 
 pub use self::{
+    builtins::Builtins,
     env::Environment,
     frame::Frame,
     native_func::{NativeFunc, NativeFuncValue},

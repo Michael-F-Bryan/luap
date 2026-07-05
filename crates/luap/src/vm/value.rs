@@ -24,6 +24,42 @@ impl From<Constant> for Value {
     }
 }
 
+impl From<NativeFuncValue> for Value {
+    fn from(func: NativeFuncValue) -> Self {
+        Value::NativeFunc(func)
+    }
+}
+
+impl From<f64> for Value {
+    fn from(n: f64) -> Self {
+        Value::Number(n)
+    }
+}
+
+impl From<bool> for Value {
+    fn from(b: bool) -> Self {
+        Value::Boolean(b)
+    }
+}
+
+impl From<String> for Value {
+    fn from(s: String) -> Self {
+        Value::String(s.into())
+    }
+}
+
+impl From<&str> for Value {
+    fn from(s: &str) -> Self {
+        Value::String(s.into())
+    }
+}
+
+impl From<Arc<str>> for Value {
+    fn from(s: Arc<str>) -> Self {
+        Value::String(s)
+    }
+}
+
 impl Display for Value {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {

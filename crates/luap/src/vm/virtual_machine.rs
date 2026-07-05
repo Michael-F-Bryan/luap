@@ -1,13 +1,14 @@
 use crate::{
     bytecode::Instruction,
     compiling::bytecode::Bytecode,
-    vm::{builtins, Environment, Frame, NativeFuncValue, Value},
+    vm::{Builtins, Environment, Frame, Value},
 };
 
 #[derive(Default, Debug)]
 pub struct VirtualMachine {
     frame: Frame,
     env: Environment,
+    builtins: Builtins,
     pc: usize,
 }
 
@@ -40,14 +41,7 @@ impl VirtualMachine {
                 Instruction::GetBuiltin { dst, id } => {
                     self.frame[dst] = match id {
                         crate::compiling::builtins::BuiltinId::Print => {
-                            Value::NativeFunc(NativeFuncValue::new(
-                                builtins::print
-                                    as fn(
-                                        &mut Environment,
-                                        &[Value],
-                                    )
-                                        -> Result<Value, RuntimeError>,
-                            ))
+                            self.builtins.print.clone().into()
                         }
                     };
                 }
@@ -61,9 +55,9 @@ impl VirtualMachine {
                         Value::NativeFunc(func) => {
                             func.call(&mut self.env, args)?;
                         }
-                        _ => {
+                        other => {
                             return Err(RuntimeError::NotCallable {
-                                value: self.frame[callee].clone(),
+                                value: other.clone(),
                             });
                         }
                     }
