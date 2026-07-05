@@ -17,7 +17,6 @@ impl From<Constant> for Value {
         match constant {
             Constant::String(s) => Value::String(s),
             Constant::Number(n) => Value::Number(n.into_inner()),
-            Constant::Integer(i) => Value::Number(i as f64),
             Constant::Boolean(b) => Value::Boolean(b),
             Constant::Nil => Value::Nil,
         }

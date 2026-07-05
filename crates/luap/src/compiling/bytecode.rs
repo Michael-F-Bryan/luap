@@ -47,7 +47,6 @@ pub enum Instruction {
 pub enum Constant {
     String(Arc<str>),
     Number(Number),
-    Integer(i64),
     Boolean(bool),
     Nil,
 }
